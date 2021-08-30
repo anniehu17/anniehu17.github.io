@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../anniehu17.github.io"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "anniehu17.github.io-pwp"
+	}
+}

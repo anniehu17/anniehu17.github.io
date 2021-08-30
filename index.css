@@ -1,0 +1,51 @@
+html, body {
+    height:100%;
+    font-size: 25px;
+  }
+
+
+/* FOOTER SETTINGS*/
+footer {
+    display:flex;
+    background-color: rgba(0, 0, 0, 0.623);
+      position: fixed;
+    left: 0;
+      bottom: 0;
+    right: 0;
+    height: 50px;
+      width: 100%;
+    color: #f0d264;
+    font-family: "Open Sans", sans-serif;
+    font-size: 17px;
+    justify-content:center;
+     align-items:center;
+}
+  
+#footer-menu {
+    display: block;
+}
+  
+#footer-menu ul li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+/* LINK COLORS */
+a:link {
+    color: #f0d264;
+}
+  
+/* visited link */
+a:visited {
+    color: #f0d264;
+}
+  
+/* mouse over link */
+a:hover {
+    color: hotpink;
+}
+  
+/* selected link */
+a:active {
+    color: #f0d264;
+}
