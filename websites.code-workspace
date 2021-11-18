@@ -4,10 +4,13 @@
 			"path": "."
 		},
 		{
-			"path": "../anniehu17.github.io"
+			"path": "../ohacksio"
+		},
+		{
+			"path": "../metronome"
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "anniehu17.github.io-pwp"
+		"liveServer.settings.multiRootWorkspaceName": "ohacksio"
 	}
 }
