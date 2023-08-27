@@ -7,14 +7,14 @@ html, body {
 /* FOOTER SETTINGS*/
 footer {
     display:flex;
-    background-color: rgba(0, 0, 0, 0.623);
+    background-color: rgba(250, 153, 153, 0.62);
       position: fixed;
     left: 0;
       bottom: 0;
     right: 0;
     height: 50px;
       width: 100%;
-    color: #f0d264;
+    color: #f064d9;
     font-family: "Open Sans", sans-serif;
     font-size: 17px;
     justify-content:center;
@@ -32,12 +32,12 @@ footer {
 
 /* LINK COLORS */
 a:link {
-    color: #f0d264;
+    color: #f064d9;
 }
   
 /* visited link */
 a:visited {
-    color: #f0d264;
+    color: #9c64f0;
 }
   
 /* mouse over link */
@@ -47,5 +47,11 @@ a:hover {
   
 /* selected link */
 a:active {
-    color: #f0d264;
+    color: #f064d9;
+}
+
+img {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
 }
