@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annie Hu - CUDA Visualizer</title>
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+    <style>
+        .cuda-visualizer {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--uchu-gray-3);
+            margin: 2rem 0;
+        }
+        .controls {
+            background: var(--uchu-gray-1);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .control-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--uchu-gray-8);
+        }
+        .control-group input {
+            padding: 0.5rem;
+            border: 1px solid var(--uchu-gray-4);
+            border-radius: 4px;
+            width: 80px;
+            font-size: 0.9rem;
+        }
+        .grid-container {
+            margin: 2rem 0;
+        }
+        .block-container {
+            border: 2px solid var(--uchu-gray-6);
+            border-radius: 6px;
+            padding: 1rem;
+            background: var(--uchu-gray-1);
+            text-align: center;
+        }
+        .block-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: var(--uchu-gray-9);
+        }
+        .thread-grid {
+            display: inline-grid;
+            gap: 2px;
+        }
+        .thread-cell {
+            width: 70px;
+            height: 70px;
+            border: 2px solid var(--uchu-gray-4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.8rem;
+            line-height: 1.1;
+            background: white;
+        }
+        .thread-cell:hover {
+            border-color: var(--uchu-pink-6);
+            background-color: var(--uchu-pink-1);
+            transform: scale(1.05);
+        }
+        .thread-cell.selected {
+            border-color: var(--uchu-pink-6);
+            background-color: var(--uchu-pink-2);
+            box-shadow: 0 0 10px rgba(118, 55, 138, 0.3);
+        }
+        .thread-cell.out-of-bounds {
+            background-color: #ffcdd2;
+            color: #666;
+            border-style: dashed;
+        }
+        .thread-cell.valid {
+            background-color: #c8e6c9;
+        }
+        .calculation-panel {
+            background: var(--uchu-gray-1);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--uchu-pink-6);
+            min-height: 120px;
+            text-align: left;
+        }
+        .formula {
+            background: #fff3e0;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+        .legend {
+            display: flex;
+            gap: 2rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--uchu-gray-4);
+        }
+        .info-text {
+            color: var(--uchu-gray-7);
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+        .update-btn {
+            padding: 0.5rem 1.2rem;
+            background: var(--uchu-pink-6);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-left: 1.2rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .update-btn:hover {
+            background: var(--uchu-pink-7);
+            transform: translateY(-1px);
+        }
+        @media (max-width: 700px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            .update-btn {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Annie Hu</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">About</a></li>
+                <li><a href="reading.html" class="nav-link">Reading List</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="cuda.html" class="nav-link">CUDA Visualizer</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- CUDA Visualizer Section -->
+        <section id="cuda" class="section">
+            <div class="container">
+                <h1>CUDA 2D Indexing Visualizer</h1>
+                <div class="cuda-container">
+                    <div class="cuda-info">
+                        <h3>Interactive CUDA Thread Indexing</h3>
+                        <p>This visualizer demonstrates how CUDA threads are mapped to global array indices in 2D. Click on any thread to see the step-by-step calculation of its global coordinates.</p>
+                    </div>
+                    
+                    <div class="cuda-visualizer">
+                        <div class="controls">
+                            <div class="control-group">
+                                <label>Threads X:</label>
+                                <input type="number" id="threadsX" value="3" min="1" max="8">
+                            </div>
+                            <div class="control-group">
+                                <label>Threads Y:</label>
+                                <input type="number" id="threadsY" value="3" min="1" max="8">
+                            </div>
+                            <div class="control-group">
+                                <label>Blocks X:</label>
+                                <input type="number" id="blocksX" value="2" min="1" max="4">
+                            </div>
+                            <div class="control-group">
+                                <label>Blocks Y:</label>
+                                <input type="number" id="blocksY" value="2" min="1" max="4">
+                            </div>
+                            <div class="control-group">
+                                <label>Array Size:</label>
+                                <input type="number" id="arraySize" value="5" min="1" max="20">
+                            </div>
+                            <button onclick="updateVisualization()" class="update-btn">Update</button>
+                        </div>
+
+                        <div class="legend">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #c8e6c9;"></div>
+                                <span>Valid (within array bounds)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #ffcdd2; border-style: dashed;"></div>
+                                <span>Out of bounds</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: var(--uchu-pink-2); border-color: var(--uchu-pink-6);"></div>
+                                <span>Selected</span>
+                            </div>
+                        </div>
+
+                        <div id="gridContainer" class="grid-container"></div>
+
+                        <div class="calculation-panel">
+                            <h3>Click a thread to see its calculation:</h3>
+                            <div id="calculationDisplay">
+                                <p class="info-text">Select any thread cell above to see how its global indices are calculated.</p>
+                            </div>
+                        </div>
+
+                        <div class="formula">
+                            <h3>The Formulas:</h3>
+                            <strong>globalI = blockIdx.x * blockDim.x + threadIdx.x</strong><br>
+                            <strong>globalJ = blockIdx.y * blockDim.y + threadIdx.y</strong><br><br>
+                            <strong>Bounds check:</strong> if (globalI &lt; arraySize && globalJ &lt; arraySize)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let selectedCell = null;
+
+        function updateVisualization() {
+            const threadsX = parseInt(document.getElementById('threadsX').value);
+            const threadsY = parseInt(document.getElementById('threadsY').value);
+            const blocksX = parseInt(document.getElementById('blocksX').value);
+            const blocksY = parseInt(document.getElementById('blocksY').value);
+            const arraySize = parseInt(document.getElementById('arraySize').value);
+
+            const container = document.getElementById('gridContainer');
+            container.innerHTML = '';
+
+            // Create a grid layout for blocks that matches 2D coordinates
+            container.style.display = 'grid';
+            container.style.gridTemplateColumns = `repeat(${blocksX}, 1fr)`;
+            container.style.gridTemplateRows = `repeat(${blocksY}, 1fr)`;
+            container.style.gap = '20px';
+            container.style.justifyItems = 'center';
+
+            for (let blockY = 0; blockY < blocksY; blockY++) {
+                for (let blockX = 0; blockX < blocksX; blockX++) {
+                    const blockContainer = document.createElement('div');
+                    blockContainer.className = 'block-container';
+                    blockContainer.style.gridColumn = blockX + 1;
+                    blockContainer.style.gridRow = blockY + 1;
+                    
+                    const blockTitle = document.createElement('div');
+                    blockTitle.className = 'block-title';
+                    blockTitle.textContent = `Block (${blockX}, ${blockY})`;
+                    blockContainer.appendChild(blockTitle);
+
+                    const threadGrid = document.createElement('div');
+                    threadGrid.className = 'thread-grid';
+                    threadGrid.style.gridTemplateColumns = `repeat(${threadsX}, 1fr)`;
+                    threadGrid.style.gridTemplateRows = `repeat(${threadsY}, 1fr)`;
+
+                    for (let threadY = 0; threadY < threadsY; threadY++) {
+                        for (let threadX = 0; threadX < threadsX; threadX++) {
+                            const globalI = blockX * threadsX + threadX;
+                            const globalJ = blockY * threadsY + threadY;
+                            const isValid = globalI < arraySize && globalJ < arraySize;
+
+                            const cell = document.createElement('div');
+                            cell.className = `thread-cell ${isValid ? 'valid' : 'out-of-bounds'}`;
+                            
+                            cell.innerHTML = `
+                                <div>t(${threadX},${threadY})</div>
+                                <div style="font-weight: bold;">[${globalI},${globalJ}]</div>
+                                <div>${isValid ? '✓' : '✗'}</div>
+                            `;
+
+                            cell.onclick = () => showCalculation(blockX, blockY, threadX, threadY, threadsX, threadsY, globalI, globalJ, arraySize, isValid);
+                            
+                            threadGrid.appendChild(cell);
+                        }
+                    }
+
+                    blockContainer.appendChild(threadGrid);
+                    container.appendChild(blockContainer);
+                }
+            }
+        }
+
+        function showCalculation(blockX, blockY, threadX, threadY, blockDimX, blockDimY, globalI, globalJ, arraySize, isValid) {
+            // Clear previous selection
+            if (selectedCell) {
+                selectedCell.classList.remove('selected');
+            }
+            
+            // Set new selection
+            selectedCell = event.target.closest('.thread-cell');
+            selectedCell.classList.add('selected');
+
+            const display = document.getElementById('calculationDisplay');
+            display.innerHTML = `
+                <h4>Thread (${threadX}, ${threadY}) in Block (${blockX}, ${blockY})</h4>
+                
+                <div style="margin: 15px 0;">
+                    <strong>Given values:</strong><br>
+                    • blockIdx.x = ${blockX}, blockIdx.y = ${blockY}<br>
+                    • threadIdx.x = ${threadX}, threadIdx.y = ${threadY}<br>
+                    • blockDim.x = ${blockDimX}, blockDim.y = ${blockDimY}<br>
+                    • arraySize = ${arraySize}
+                </div>
+
+                <div style="background: #fff3e0; padding: 10px; border-radius: 5px; margin: 10px 0;">
+                    <strong>Step-by-step calculation:</strong><br><br>
+                    
+                    <strong>globalI calculation:</strong><br>
+                    globalI = blockIdx.x × blockDim.x + threadIdx.x<br>
+                    globalI = ${blockX} × ${blockDimX} + ${threadX}<br>
+                    globalI = ${blockX * blockDimX} + ${threadX}<br>
+                    <strong>globalI = ${globalI}</strong><br><br>
+                    
+                    <strong>globalJ calculation:</strong><br>
+                    globalJ = blockIdx.y × blockDim.y + threadIdx.y<br>
+                    globalJ = ${blockY} × ${blockDimY} + ${threadY}<br>
+                    globalJ = ${blockY * blockDimY} + ${threadY}<br>
+                    <strong>globalJ = ${globalJ}</strong>
+                </div>
+
+                <div style="background: ${isValid ? '#e8f5e8' : '#ffebee'}; padding: 10px; border-radius: 5px;">
+                    <strong>Bounds check:</strong><br>
+                    if (${globalI} < ${arraySize} && ${globalJ} < ${arraySize})<br>
+                    if (${globalI < arraySize} && ${globalJ < arraySize})<br>
+                    <strong>Result: ${isValid ? 'VALID - accesses a[' + globalI + '][' + globalJ + ']' : 'OUT OF BOUNDS - thread does nothing'}</strong>
+                </div>
+            `;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateVisualization();
+        });
+    </script>
+</body>
+</html> 

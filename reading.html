@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annie Hu - Reading List</title>
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Annie Hu</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">About</a></li>
+                <li><a href="reading.html" class="nav-link">Reading List</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Reading List Section -->
+        <section id="reading" class="section">
+            <div class="container">
+                <h1>Reading List & Resources</h1>
+                <div class="tabs-container">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="reading-list">Reading List</button>
+                        <button class="tab-btn" data-tab="link-list">Link List</button>
+                        <button class="tab-btn" data-tab="concept-list">Concept List</button>
+                        <button class="tab-btn" data-tab="people-list">People List</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="reading-list">
+                        <div class="spreadsheet-container">
+                            <table class="spreadsheet">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>The Pragmatic Programmer</td>
+                                        <td>Andrew Hunt, David Thomas</td>
+                                        <td>Programming</td>
+                                        <td>Reading</td>
+                                        <td>Essential for software development</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Design Patterns</td>
+                                        <td>Gang of Four</td>
+                                        <td>Programming</td>
+                                        <td>To Read</td>
+                                        <td>Classic software design patterns</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Clean Code</td>
+                                        <td>Robert C. Martin</td>
+                                        <td>Programming</td>
+                                        <td>Completed</td>
+                                        <td>Excellent principles for writing maintainable code</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="link-list">
+                        <div class="spreadsheet-container">
+                            <table class="spreadsheet">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>URL</th>
+                                        <th>Category</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Uchu Color Palette</td>
+                                        <td><a href="https://uchu.style/" target="_blank">uchu.style</a></td>
+                                        <td>Design</td>
+                                        <td>Beautiful color palette used on this site</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NVIDIA CUDA Documentation</td>
+                                        <td><a href="https://docs.nvidia.com/cuda/" target="_blank">docs.nvidia.com</a></td>
+                                        <td>Programming</td>
+                                        <td>Official CUDA programming guide</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="concept-list">
+                        <div class="spreadsheet-container">
+                            <table class="spreadsheet">
+                                <thead>
+                                    <tr>
+                                        <th>Concept</th>
+                                        <th>Category</th>
+                                        <th>Description</th>
+                                        <th>Resources</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>CUDA Programming</td>
+                                        <td>GPU Computing</td>
+                                        <td>Parallel computing on NVIDIA GPUs</td>
+                                        <td>NVIDIA Documentation</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Design Patterns</td>
+                                        <td>Software Architecture</td>
+                                        <td>Reusable solutions to common problems</td>
+                                        <td>Gang of Four Book</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="people-list">
+                        <div class="spreadsheet-container">
+                            <table class="spreadsheet">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Field</th>
+                                        <th>Why Interesting</th>
+                                        <th>Links</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>NetOperator Wibby</td>
+                                        <td>Design</td>
+                                        <td>Created the beautiful Uchu color palette</td>
+                                        <td><a href="https://uchu.style/" target="_blank">Uchu Palette</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Robert C. Martin</td>
+                                        <td>Software Engineering</td>
+                                        <td>Clean Code principles and SOLID design</td>
+                                        <td><a href="https://cleancoder.com/" target="_blank">Clean Coder</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="index.js"></script>
+</body>
+</html> 
