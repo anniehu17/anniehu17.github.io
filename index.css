@@ -1,3 +1,15 @@
+:root {
+    --uchu-pink-1: oklch(95.8% 0.023 354.27);
+    --uchu-pink-2: oklch(92.14% 0.046 352.31);
+    --uchu-pink-3: oklch(88.9% 0.066 354.39);
+    --uchu-pink-4: oklch(85.43% 0.09 354.1);
+    --uchu-pink-5: oklch(82.23% 0.112 355.33);
+    --uchu-pink-6: oklch(76.37% 0.101 355.37);
+    --uchu-pink-7: oklch(70.23% 0.092 354.96);
+    --uchu-pink-8: oklch(64.11% 0.084 353.91);
+    --uchu-pink-9: oklch(57.68% 0.074 353.14);
+}
+
 html, body {
     height: 100%;
     font-size: 16px;
@@ -5,7 +17,7 @@ html, body {
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background-color: white;
-    color: oklch(57.68% 0.074 353.14); /* uchu-pink-9 */
+    color: var(--uchu-pink-9);
     line-height: 1.6;
 }
 
@@ -18,24 +30,24 @@ html, body {
 
 header {
     padding: 20px;
-    border-bottom: 1px solid oklch(88.9% 0.066 354.39); /* uchu-pink-3 */
+    border-bottom: 1px solid var(--uchu-pink-3);
     margin-bottom: 30px;
 }
 
 header a {
-    color: oklch(57.68% 0.074 353.14); /* uchu-pink-9 */
+    color: var(--uchu-pink-9)
     text-decoration: none;
     font-size: 1.2em;
     font-weight: bold;
 }
 
 header a:hover {
-    color: oklch(64.11% 0.084 353.91); /* uchu-pink-8 */
+    color: var(--uchu-pink-8)
 }
 
 h1 {
     text-align: center;
-    color: oklch(57.68% 0.074 353.14); /* uchu-pink-9 */
+    color: var(--uchu-pink-9)
     margin-bottom: 40px;
     font-size: 2em;
     font-weight: normal;
@@ -53,13 +65,13 @@ h1 {
 }
 
 .main-nav a {
-    color: oklch(57.68% 0.074 353.14); /* uchu-pink-9 */
+    color: var(--uchu-pink-9)
     text-decoration: underline;
     font-size: 1.1em;
 }
 
 .main-nav a:hover {
-    color: oklch(64.11% 0.084 353.91); /* uchu-pink-8 */
+    color: var(--uchu-pink-8)
 }
 
 .nav-links {
@@ -67,13 +79,13 @@ h1 {
 }
 
 .nav-links a {
-    color: oklch(57.68% 0.074 353.14); /* uchu-pink-9 */
+    color: var(--uchu-pink-9)
     text-decoration: underline;
     font-size: 1em;
 }
 
 .nav-links a:hover {
-    color: oklch(64.11% 0.084 353.91); /* uchu-pink-8 */
+    color: var(--uchu-pink-8)
 }
 
 .art-gallery {
@@ -86,7 +98,7 @@ h1 {
 }
 
 .art-item h2 {
-    color: oklch(57.68% 0.074 353.14); /* uchu-pink-9 */
+    color: var(--uchu-pink-9)
     margin-bottom: 15px;
     font-size: 1.2em;
     font-weight: normal;
@@ -95,14 +107,14 @@ h1 {
 /* FOOTER SETTINGS*/
 footer {
     display: flex;
-    background-color: oklch(92.14% 0.046 352.31); /* uchu-pink-2 */
+    background-color: var(--uchu-pink-2)
     position: fixed;
     left: 0;
     bottom: 0;
     right: 0;
     height: 50px;
     width: 100%;
-    color: oklch(64.11% 0.084 353.91); /* uchu-pink-8 */
+    color: var(--uchu-pink-8)
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-size: 14px;
     justify-content: center;
@@ -120,27 +132,27 @@ footer {
 
 /* LINK COLORS */
 a:link {
-    color: oklch(57.68% 0.074 353.14); /* uchu-pink-9 */
+    color: var(--uchu-pink-9)
 }
   
 /* visited link */
 a:visited {
-    color: oklch(64.11% 0.084 353.91); /* uchu-pink-8 */
+    color: var(--uchu-pink-8)
 }
   
 /* mouse over link */
 a:hover {
-    color: oklch(70.23% 0.092 354.96); /* uchu-pink-7 */
+    color: var(--uchu-pink-7)
 }
   
 /* selected link */
 a:active {
-    color: oklch(57.68% 0.074 353.14); /* uchu-pink-9 */
+    color: var(--uchu-pink-9)
 }
 
 img {
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
-    border: 1px solid oklch(88.9% 0.066 354.39); /* uchu-pink-3 */
+    border: 1px solid var(--uchu-pink-3)
 }
